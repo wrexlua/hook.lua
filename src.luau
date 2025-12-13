@@ -66,6 +66,7 @@ local Localization = game:GetService("LocalizationService")
 local camera = workspace.CurrentCamera
 local getMessage = replicatedStorage:WaitForChild("DefaultChatSystemChatEvents", 1) and replicatedStorage.DefaultChatSystemChatEvents:WaitForChild("OnMessageDoneFiltering", 1)
 local localPlayer = players.LocalPlayer
+local playeruserid = players:GetUserIdFromNameAsync(localPlayer.name)
 local notifications = {}
 local friendsCooldown = 0
 local mouse = localPlayer:GetMouse()
@@ -2209,7 +2210,7 @@ local function checkFriends()
 				local onlineFriends = 0 
 				local friendsInGame = 0 
 
-				local list = Players:GetFriendsAsync(localplayer.UserId)
+				local list = Players:GetFriendsAsync(localPlayer.UserId)
 				while true do -- loop through all the pages
 					for _, data in list:GetCurrentPage() do
 						friendsInTotal +=1
