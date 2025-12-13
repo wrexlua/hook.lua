@@ -2209,7 +2209,7 @@ local function checkFriends()
 				local onlineFriends = 0 
 				local friendsInGame = 0 
 
-				local list = Players:GetFriendsAsync(Player.UserId)
+				local list = Players:GetFriendsAsync(player.UserId)
 				while true do -- loop through all the pages
 					for _, data in list:GetCurrentPage() do
 						friendsInTotal +=1
