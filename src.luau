@@ -2233,10 +2233,12 @@ local function checkFriends()
 						friendsInGame = friendsInGame + 1
 					end
 				end
-		homeContainer.Interactions.Friends.All.Value.Text = tostring(friendsInTotal).." friends"
-		homeContainer.Interactions.Friends.Offline.Value.Text = tostring(friendsInTotal - onlineFriends).." friends"
-		homeContainer.Interactions.Friends.Online.Value.Text = tostring(onlineFriends).." friends"
-		homeContainer.Interactions.Friends.InGame.Value.Text = tostring(friendsInGame).." friends"
+
+                 if not checkhooklua() then return end
+		         homeContainer.Interactions.Friends.All.Value.Text = tostring(friendsInTotal).." friends"
+		         homeContainer.Interactions.Friends.Offline.Value.Text = tostring(friendsInTotal - onlineFriends).." friends"
+		         homeContainer.Interactions.Friends.Online.Value.Text = tostring(onlineFriends).." friends"
+		         homeContainer.Interactions.Friends.InGame.Value.Text = tostring(friendsInGame).." friends"
 
 			else
 				friendsCooldown -= 1
