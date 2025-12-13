@@ -66,7 +66,6 @@ local Localization = game:GetService("LocalizationService")
 local camera = workspace.CurrentCamera
 local getMessage = replicatedStorage:WaitForChild("DefaultChatSystemChatEvents", 1) and replicatedStorage.DefaultChatSystemChatEvents:WaitForChild("OnMessageDoneFiltering", 1)
 local localPlayer = players.LocalPlayer
-local playeruserid = players:GetUserIdFromNameAsync(localPlayer.name)
 local notifications = {}
 local friendsCooldown = 0
 local mouse = localPlayer:GetMouse()
