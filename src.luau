@@ -2235,7 +2235,7 @@ local function checkFriends()
 			end
 		end
 
-		if not checkhooklua() then return end
+		if not checkSirius() then return end
 
 		homeContainer.Interactions.Friends.All.Value.Text = tostring(friendsInTotal).." friends"
 		homeContainer.Interactions.Friends.Offline.Value.Text = tostring(friendsInTotal - onlineFriends).." friends"
@@ -2245,6 +2245,7 @@ local function checkFriends()
 	else
 		friendsCooldown -= 1
 	end
+end
 
 function promptModerator(player, role)
 	local serversAvailable = false
