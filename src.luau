@@ -2200,51 +2200,52 @@ local function ensureFrameProperties()
 end
 
 local function checkFriends()
-			if friendsCooldown == 0 then
+	if friendsCooldown == 0 then
 
-				friendsCooldown = 25
+		friendsCooldown = 25
 
-				local playersFriends = {}
-				local friendsInTotal = 0
-				local onlineFriends = 0 
-				local friendsInGame = 0 
+		local playersFriends = {}
+		local success, page = pcall(players.GetFriendsAsync, players, localPlayer.UserId)
 
-				local list = players:GetFriendsAsync(localPlayer.UserId)
-				while true do -- loop through all the pages
-					for _, data in list:GetCurrentPage() do
-						friendsInTotal +=1
-						table.insert(playersFriends, Data)
-					end
-
-					if list.IsFinished then
-						-- stop the loop since this is the last page
-						break
-					else 
-						-- go to the next page
-						list:AdvanceToNextPageAsync()
-					end
+		if success then
+			repeat
+				local info = page:GetCurrentPage()
+				for i, friendInfo in pairs(info) do
+					table.insert(playersFriends, friendInfo)
 				end
-				for i, v in pairs(Player:GetFriendsOnline()) do
-					onlineFriends += 1
+				if not page.IsFinished then 
+					page:AdvanceToNextPageAsync()
 				end
+			until page.IsFinished
+		end
 
-				for i,v in pairs(playersFriends) do
-					if Players:FindFirstChild(v.Username) then
-						friendsInGame = friendsInGame + 1
-					end
-				end
+		local friendsInTotal = 0
+		local onlineFriends = 0 
+		local friendsInGame = 0 
 
-                 if not checkhooklua() then return end
-		         homeContainer.Interactions.Friends.All.Value.Text = tostring(friendsInTotal).." friends"
-		         homeContainer.Interactions.Friends.Offline.Value.Text = tostring(friendsInTotal - onlineFriends).." friends"
-		         homeContainer.Interactions.Friends.Online.Value.Text = tostring(onlineFriends).." friends"
-		         homeContainer.Interactions.Friends.InGame.Value.Text = tostring(friendsInGame).." friends"
+		for i,v in pairs(playersFriends) do
+			friendsInTotal  = friendsInTotal + 1
 
-			else
-				friendsCooldown -= 1
+			if v.IsOnline then
+				onlineFriends = onlineFriends + 1
+			end
+
+			if players:FindFirstChild(v.Username) then
+				friendsInGame = friendsInGame + 1
 			end
 		end
 
+		if not checkhooklua() then return end
+
+		homeContainer.Interactions.Friends.All.Value.Text = tostring(friendsInTotal).." friends"
+		homeContainer.Interactions.Friends.Offline.Value.Text = tostring(friendsInTotal - onlineFriends).." friends"
+		homeContainer.Interactions.Friends.Online.Value.Text = tostring(onlineFriends).." friends"
+		homeContainer.Interactions.Friends.InGame.Value.Text = tostring(friendsInGame).." friends"
+
+	else
+		friendsCooldown -= 1
+	end
+end
 function promptModerator(player, role)
 	local serversAvailable = false
 	local promptClosed = false
