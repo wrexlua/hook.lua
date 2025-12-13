@@ -2204,12 +2204,12 @@ local function checkFriends()
 
 		friendsCooldown = 25
 
-		local playersFriends = {}
+				local playersFriends = {}
 				local friendsInTotal = 0
 				local onlineFriends = 0 
 				local friendsInGame = 0 
 
-				local list = players:GetFriendsAsync(players.LocalPlayer.UserId)
+				local list = Players:GetFriendsAsync(Player.UserId)
 				while true do -- loop through all the pages
 					for _, data in list:GetCurrentPage() do
 						friendsInTotal +=1
@@ -2233,7 +2233,6 @@ local function checkFriends()
 						friendsInGame = friendsInGame + 1
 					end
 				end
-		if not checkhooklua() then return end
 
 		homeContainer.Interactions.Friends.All.Value.Text = tostring(friendsInTotal).." friends"
 		homeContainer.Interactions.Friends.Offline.Value.Text = tostring(friendsInTotal - onlineFriends).." friends"
