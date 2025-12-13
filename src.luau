@@ -60,6 +60,7 @@ local teleportService = game:GetService("TeleportService")
 local tweenService = game:GetService("TweenService")
 local userInputService = game:GetService('UserInputService')
 local gameSettings = UserSettings():GetService("UserGameSettings")
+local Localization = game:GetService("LocalizationService")
 
 -- Variables
 local camera = workspace.CurrentCamera
