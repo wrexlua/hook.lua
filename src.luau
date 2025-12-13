@@ -1931,7 +1931,7 @@ local function closePanel(panelName, openingOther)
 				if playerIns.ClassName == "Frame" then
 					tweenService:Create(playerIns, TweenInfo.new(0.15, Enum.EasingStyle.Quint), {BackgroundTransparency = 1}):Play()
 				elseif playerIns.ClassName == "TextLabel" or playerIns.ClassName == "TextButton" then
-					if playerIns.Name == "Name" then
+					if playerIns.Name == "DisplayName" then
 						tweenService:Create(playerIns, TweenInfo.new(0.15, Enum.EasingStyle.Quint), {TextTransparency = 1}):Play()
 					else
 						tweenService:Create(playerIns, TweenInfo.new(0.15, Enum.EasingStyle.Quint), {TextTransparency = 1}):Play()
