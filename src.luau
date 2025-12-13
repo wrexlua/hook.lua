@@ -2365,7 +2365,7 @@ local function UpdateHome()
 	homeContainer.Interactions.Server.Time.Value.Text = convertToHMS(time())
 
 	-- Region
-	homeContainer.Interactions.Server.Region.Value.Text = Localization:GetCountryRegionForPlayerAsync(Players.LocalPlayer)
+	homeContainer.Interactions.Server.Region.Value.Text = Localization:GetCountryRegionForPlayerAsync(players.LocalPlayer)
 
 	-- Player Information
 	homeContainer.Interactions.User.Avatar.Image = "https://www.roblox.com/headshot-thumbnail/image?userId="..localPlayer.UserId.."&width=420&height=420&format=png"
