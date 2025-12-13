@@ -2865,6 +2865,7 @@ local function searchScriptBlox(query)
 
 	if not success then
 		queueNotification("ScriptSearch", "ScriptSearch backend encountered an error, try again later", 4384402990)
+        print("Error 429: So many requests.")
 		closeScriptSearch()
 		return
 	end
@@ -2914,6 +2915,7 @@ local function searchScriptBlox(query)
 		end
 	else
 		queueNotification("ScriptSearch", "ScriptSearch backend encountered an error, try again later", 4384402990)
+        print("Error 429: So many requests.")
 		closeScriptSearch()
 		return
 	end
