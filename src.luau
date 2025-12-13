@@ -2236,7 +2236,7 @@ local function checkFriends()
 			end
 		end
 
-		if not checkSirius() then return end
+		if not checkhooklua() then return end
 
 		homeContainer.Interactions.Friends.All.Value.Text = tostring(friendsInTotal).." friends"
 		homeContainer.Interactions.Friends.Offline.Value.Text = tostring(friendsInTotal - onlineFriends).." friends"
