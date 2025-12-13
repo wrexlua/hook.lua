@@ -51,6 +51,7 @@ local coreGui = game:GetService("CoreGui")
 local httpService = game:GetService("HttpService")
 local lighting = game:GetService("Lighting")
 local players = game:GetService("Players")
+local player = players.LocalPlayer
 local replicatedStorage = game:GetService("ReplicatedStorage")
 local runService = game:GetService("RunService")
 local guiService = game:GetService("GuiService")
@@ -2209,7 +2210,7 @@ local function checkFriends()
 				local onlineFriends = 0 
 				local friendsInGame = 0 
 
-				local list = Players:GetFriendsAsync(players.LocalPlayer.UserId)
+				local list = Players:GetFriendsAsync(player.UserId)
 				while true do -- loop through all the pages
 					for _, data in list:GetCurrentPage() do
 						friendsInTotal +=1
