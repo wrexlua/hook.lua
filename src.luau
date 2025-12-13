@@ -2205,36 +2205,34 @@ local function checkFriends()
 		friendsCooldown = 25
 
 		local playersFriends = {}
-		local success, page = pcall(players.GetFriendsAsync, players, localPlayer.UserId)
+				local friendsInTotal = 0
+				local onlineFriends = 0 
+				local friendsInGame = 0 
 
-		if success then
-			repeat
-				local info = page:GetCurrentPage()
-				for i, friendInfo in pairs(info) do
-					table.insert(playersFriends, friendInfo)
+				local list = players:GetFriendsAsync(players.LocalPlayer.UserId)
+				while true do -- loop through all the pages
+					for _, data in list:GetCurrentPage() do
+						friendsInTotal +=1
+						table.insert(playersFriends, Data)
+					end
+
+					if list.IsFinished then
+						-- stop the loop since this is the last page
+						break
+					else 
+						-- go to the next page
+						list:AdvanceToNextPageAsync()
+					end
 				end
-				if not page.IsFinished then 
-					page:AdvanceToNextPageAsync()
+				for i, v in pairs(Player:GetFriendsOnline()) do
+					onlineFriends += 1
 				end
-			until page.IsFinished
-		end
 
-		local friendsInTotal = 0
-		local onlineFriends = 0 
-		local friendsInGame = 0 
-
-		for i,v in pairs(playersFriends) do
-			friendsInTotal  = friendsInTotal + 1
-
-			if v.IsOnline then
-				onlineFriends = onlineFriends + 1
-			end
-
-			if players:FindFirstChild(v.Username) then
-				friendsInGame = friendsInGame + 1
-			end
-		end
-
+				for i,v in pairs(playersFriends) do
+					if Players:FindFirstChild(v.Username) then
+						friendsInGame = friendsInGame + 1
+					end
+				end
 		if not checkhooklua() then return end
 
 		homeContainer.Interactions.Friends.All.Value.Text = tostring(friendsInTotal).." friends"
