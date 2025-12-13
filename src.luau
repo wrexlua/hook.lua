@@ -683,7 +683,7 @@ local hookluaSettings = {
 				name = 'Intelligent HTTP Interception',
 				description = 'Block external HTTP/HTTPS requests from being sent/recieved and ask you before allowing it to run.',
 				settingType = 'Boolean',
-				minimumLicense = 'Essential',
+				minimumLicense = 'Pro',
 				current = true,
 
 				id = 'intflowintercept'
@@ -692,7 +692,7 @@ local hookluaSettings = {
 				name = 'Intelligent Clipboard Interception',
 				description = 'Block your clipboard from being set and ask you before allowing it to set your clipboard.',
 				settingType = 'Boolean',
-				minimumLicense = 'Essential',
+				minimumLicense = 'Pro',
 				current = true,
 
 				id = 'intflowinterceptclip'
@@ -1538,8 +1538,8 @@ local function syncExperienceInformation()
 
 			local minimumTier = gameFound.minimumTier
 
-			if minimumTier == "Essential" then
-				if not (Essential or Pro) then
+			if minimumTier == "Pro" then
+				if not (Pro or Pro) then
 					return
 				end
 			elseif minimumTier == "Pro" then
@@ -2795,7 +2795,7 @@ local function securityDetection(title, content, link, gradient, actions)
 	return decision
 end
 
-if Essential or Pro then
+if Pro or Pro then
 	getgenv()[index] = function(data)
 		if checkhooklua() and checkSetting("Intelligent HTTP Interception").current then
 			local title = "Do you trust this source?"
@@ -3505,7 +3505,7 @@ local function assembleSettings()
 
 
 					if minimumLicense then
-						if (minimumLicense == "Pro" and not Pro) or (minimumLicense == "Essential" and not (Pro or Essential)) then
+						if (minimumLicense == "Pro" and not Pro) or (minimumLicense == "Pro" and not (Pro or Pro)) then
 							newSwitch.Switch.Indicator.Position = UDim2.new(1, -40, 0.5, 0)
 							newSwitch.Switch.Indicator.UIStroke.Color = Color3.fromRGB(255, 255, 255)
 							newSwitch.Switch.Indicator.BackgroundColor3 = Color3.fromRGB(235, 235, 235)			
@@ -3515,7 +3515,7 @@ local function assembleSettings()
 
 					newSwitch.Interact.MouseButton1Click:Connect(function()
 						if minimumLicense then
-							if (minimumLicense == "Pro" and not Pro) or (minimumLicense == "Essential" and not (Pro or Essential)) then
+							if (minimumLicense == "Pro" and not Pro) or (minimumLicense == "Pro" and not (Pro or Pro)) then
 								queueNotification("This feature is locked", "You must be "..minimumLicense.." or higher to use "..setting.name..". \n\nUpgrade at https://example.com.", 4483345875)
 								return
 							end
@@ -3566,7 +3566,7 @@ local function assembleSettings()
 
 					newInput.InputFrame.InputBox.FocusLost:Connect(function()
 						if minimumLicense then
-							if (minimumLicense == "Pro" and not Pro) or (minimumLicense == "Essential" and not (Pro or Essential)) then
+							if (minimumLicense == "Pro" and not Pro) or (minimumLicense == "Pro" and not (Pro or Pro)) then
 								queueNotification("This feature is locked", "You must be "..minimumLicense.." or higher to use "..setting.name..". \n\nUpgrade at https://example.com.", 4483345875)
 								newInput.InputFrame.InputBox.Text = setting.current
 								return
@@ -3611,7 +3611,7 @@ local function assembleSettings()
 					newInput.InputFrame.InputBox.FocusLost:Connect(function()
 
 						if minimumLicense then
-							if (minimumLicense == "Pro" and not Pro) or (minimumLicense == "Essential" and not (Pro or Essential)) then
+							if (minimumLicense == "Pro" and not Pro) or (minimumLicense == "Pro" and not (Pro or Pro)) then
 								queueNotification("This feature is locked", "You must be "..minimumLicense.." or higher to use "..setting.name..". \n\nUpgrade at https://example.com.", 4483345875)
 								newInput.InputFrame.InputBox.Text = setting.current
 								return
@@ -3670,7 +3670,7 @@ local function assembleSettings()
 						checkingForKey = false
 
 						if minimumLicense then
-							if (minimumLicense == "Pro" and not Pro) or (minimumLicense == "Essential" and not (Pro or Essential)) then
+							if (minimumLicense == "Pro" and not Pro) or (minimumLicense == "Pro" and not (Pro or Pro)) then
 								queueNotification("This feature is locked", "You must be "..minimumLicense.." or higher to use "..setting.name..". \n\nUpgrade at https://example.com.", 4483345875)
 								newKeybind.InputFrame.InputBox.Text = setting.current
 								return
@@ -3831,7 +3831,7 @@ local function start()
 		closeSmartBar() 
 	end
 
-	if script_key and not (Essential or Pro) then
+	if script_key and not (Pro or Pro) then
 		queueNotification("License Error", "We've detected a key being placed above hook.lua loadstring, however your key seems to be invalid. Make a support request at discord.gg/example to get this solved within minutes.", "document-minus")
 	end
 
